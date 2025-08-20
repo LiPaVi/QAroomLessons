@@ -1,0 +1,28 @@
+Explore: Delete activities
+Using Postman
+To discover: Removing an erroneusly added activity
+
+1. Delete activity: 
+- Dublicated 'INFO' logs
+
+2025-08-20 14:40:13 2025-08-20T12:40:13.510100Z  INFO request{method=DELETE path=/activities/1 version=HTTP/1.1 remote.addr=172.17.0.1:60926}: warp::filters::trace: processing request
+2025-08-20 14:40:13 2025-08-20T12:40:13.510119Z  INFO request{method=DELETE path=/activities/1 version=HTTP/1.1 remote.addr=172.17.0.1:60926}: warp::filters::trace: processing request
+
+2025-08-20 14:40:13 2025-08-20T12:40:13.510214Z  INFO request{method=DELETE path=/activities/1 version=HTTP/1.1 remote.addr=172.17.0.1:60926}: warp::filters::trace: finished processing with success status=200
+2025-08-20 14:40:13 2025-08-20T12:40:13.510222Z  INFO request{method=DELETE path=/activities/1 version=HTTP/1.1 remote.addr=172.17.0.1:60926}: warp::filters::trace: finished processing with success status=200
+
+- There are some 'WARN' with status 405, but we have status 200
+
+2025-08-20 14:40:13 2025-08-20T12:40:13.510158Z  WARN request{method=DELETE path=/activities/1 version=HTTP/1.1 remote.addr=172.17.0.1:60926}: warp::filters::trace: unable to serve request (client error) status=405 error=Some(Rejection(MethodNotAllowed))
+2025-08-20 14:40:13 2025-08-20T12:40:13.510165Z  INFO request{method=DELETE path=/activities/1 version=HTTP/1.1 remote.addr=172.17.0.1:60926}: warp::filters::trace: processing request
+
+2. Delete unexising activity
+- 'ERROR' with status 500, in postman - 416
+
+2025-08-20 14:41:49 2025-08-20T12:41:49.242718Z ERROR request{method=DELETE path=/activities/1 version=HTTP/1.1 remote.addr=172.17.0.1:48306}: warp::filters::trace: unable to process request (internal error) status=500 error=Some(Rejection([MethodNotAllowed, ActivitiesNotFound, MethodNotAllowed, MethodNotAllowed, MethodNotAllowed, MethodNotAllowed]))
+
+3. No restriction on id format. So there is could be an activity with id = "", that we can't remove
+
+4. Answer should be in JSON format
+
+5. No API-documentation (swagger or something) 
